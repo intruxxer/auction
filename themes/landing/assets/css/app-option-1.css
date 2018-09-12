@@ -1,0 +1,350 @@
+@import url("https://fonts.googleapis.com/css?family=Cabin:400,500,700");
+body {
+  font-family: "Cabin", sans-serif;
+  line-height: 1.5;
+  background-color: #fff;
+  width: 100%;
+  padding: 0;
+  margin: 0; }
+
+h1, h2, h3, h4 {
+  font-family: "Cabin", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  padding: 0; }
+
+h4 {
+  color: #292e40;
+  margin-bottom: 1rem; }
+
+p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #292e40; }
+
+/**
+ * HEADER
+ */
+header#main-header {
+  background-color: #292e40;
+  width: 100%;
+  z-index: 99; }
+  @media (min-width: 0) {
+    header#main-header {
+      position: fixed;
+      left: 0;
+      top: 0; } }
+  header#main-header #logo-123quanto {
+    margin-top: 11px; }
+
+/*
+ * MAIN NAVIGATION
+ */
+ul#main-navigation {
+  padding: 0;
+  margin: 0;
+  float: right;
+  list-style-type: none; }
+  ul#main-navigation li {
+    margin-top: 10px;
+    margin-bottom: 13px;
+    float: left;
+    border-right: 1px solid #fff; }
+    ul#main-navigation li:last-child {
+      margin-right: 0;
+      border: none; }
+    ul#main-navigation li a {
+      color: #fff;
+      padding: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: block; }
+
+/*
+ * PAGINATION
+ */
+@media (min-width: 0) {
+  #pagination {
+    background-color: transparent;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    right: auto;
+    top: auto;
+    bottom: 32px;
+    z-index: 1000; } }
+
+@media (min-width: 1024px) {
+  #pagination {
+    width: 1px;
+    height: 100vh;
+    position: absolute;
+    left: auto;
+    right: 0;
+    top: 0;
+    bottom: auto; } }
+
+@media (min-width: 0) {
+  #pagination ul {
+    padding: 0;
+    margin: 0;
+    margin-left: 10px;
+    margin-top: -8px;
+    list-style-type: none;
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none; } }
+
+@media (min-width: 1024px) {
+  #pagination ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    position: absolute;
+    left: -48px;
+    top: 50%;
+    transform: translateY(-50%); } }
+
+@media (min-width: 0) {
+  #pagination ul li {
+    padding: 0;
+    padding-left: 0;
+    padding-right: 10px;
+    float: left; } }
+
+@media (min-width: 1024px) {
+  #pagination ul li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    float: none; } }
+
+#pagination ul li a {
+  background-color: transparent;
+  width: 16px;
+  height: 16px;
+  display: block;
+  border: 1px solid #fff;
+  border-radius: 50%; }
+
+#pagination ul li.is-active a {
+  background-color: #fff; }
+
+/*
+ *
+ */
+@media (min-width: 0) {
+  #skip-overview {
+    color: #fff;
+    width: 24px;
+    height: 16px;
+    margin-left: 0;
+    display: block;
+    position: absolute;
+    left: auto;
+    right: 10px;
+    bottom: 24px;
+    z-index: 101; } }
+
+@media (min-width: 1024px) {
+  #skip-overview {
+    margin-left: -12px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    right: auto;
+    bottom: 32px; } }
+
+#skip-overview i {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+
+/*
+ * BADGE
+ */
+ul.app-badge {
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+  list-style-type: none; }
+  ul.app-badge li {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: table-cell; }
+    ul.app-badge li a {
+      display: block; }
+
+/**
+ * OVERVIEW SECTION
+ */
+section#overview {
+  background-color: #292e40;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 1; }
+  @media (min-width: 0) {
+    section#overview .parts {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      opacity: 0; } }
+  section#overview .parts.spacer {
+    left: 0 !important;
+    z-index: 100;
+    opacity: 0; }
+  section#overview .parts.static {
+    left: 0 !important;
+    z-index: 100;
+    opacity: 1; }
+    section#overview .parts.static .box {
+      padding-top: 0;
+      position: relative; }
+      @media (min-width: 0) {
+        section#overview .parts.static .box {
+          height: auto; } }
+      @media (min-width: 768px) {
+        section#overview .parts.static .box {
+          height: 400px; } }
+      @media (min-width: 0) {
+        section#overview .parts.static .box .row, section#overview .parts.static .box .columns {
+          height: auto; } }
+      @media (min-width: 768px) {
+        section#overview .parts.static .box .row, section#overview .parts.static .box .columns {
+          height: 100%; } }
+  section#overview .parts #phone-container {
+    background-image: url(../img/phone-base.png);
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative; }
+    @media (min-width: 0) {
+      section#overview .parts #phone-container {
+        width: 144px;
+        height: 300px; } }
+    @media (min-width: 768px) {
+      section#overview .parts #phone-container {
+        width: 192px;
+        height: 400px; } }
+    @media (min-width: 0) {
+      section#overview .parts #phone-container img {
+        width: 124px; } }
+    @media (min-width: 768px) {
+      section#overview .parts #phone-container img {
+        width: 162px; } }
+    section#overview .parts #phone-container .screen {
+      position: absolute;
+      opacity: 0; }
+      @media (min-width: 0) {
+        section#overview .parts #phone-container .screen {
+          left: 11px;
+          top: 42px; } }
+      @media (min-width: 768px) {
+        section#overview .parts #phone-container .screen {
+          left: 16px;
+          top: 57px; } }
+      section#overview .parts #phone-container .screen#screen-1 {
+        opacity: 1 !important; }
+  section#overview .parts#part-1 {
+    opacity: 1;
+    z-index: 4; }
+  section#overview .parts#part-2 {
+    opacity: 0;
+    z-index: 3; }
+  section#overview .parts#part-3 {
+    opacity: 0;
+    z-index: 2; }
+  section#overview .parts#part-4 {
+    opacity: 0;
+    z-index: 1; }
+  section#overview .parts img {
+    margin-bottom: 1.5rem; }
+  @media (min-width: 0) {
+    section#overview .parts .box {
+      height: auto;
+      width: 100%;
+      margin-top: 64px;
+      padding-top: 160px;
+      height: auto; } }
+  @media (min-width: 768px) {
+    section#overview .parts .box {
+      height: 400px;
+      margin-top: 0;
+      padding-top: 192px;
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%); } }
+  @media (min-width: 1024px) {
+    section#overview .parts .box {
+      padding-top: 0; } }
+  section#overview .parts h1 {
+    color: #f05523;
+    line-height: 1.1; }
+    @media (min-width: 0) {
+      section#overview .parts h1 {
+        font-size: 28px;
+        margin-bottom: 1rem; } }
+    @media (min-width: 1024px) {
+      section#overview .parts h1 {
+        font-size: 64px;
+        margin-top: 37px;
+        margin-bottom: 0; } }
+  section#overview .parts p {
+    font-size: 24px;
+    color: #fff;
+    line-height: 1.1; }
+    @media (min-width: 0) {
+      section#overview .parts p.lead {
+        font-size: 24px;
+        margin-top: 0; } }
+    @media (min-width: 768px) {
+      section#overview .parts p.lead {
+        font-size: 42px;
+        margin-top: 35px; } }
+  @media (min-width: 0) {
+    section#overview .parts ul.app-badge {
+      margin-top: 16px;
+      display: none; } }
+  @media (min-width: 1024px) {
+    section#overview .parts ul.app-badge {
+      margin-top: 360px;
+      display: table; } }
+
+section#auction-time {
+  background-color: #fff;
+  padding-top: 6rem;
+  padding-bottom: 3rem; }
+  section#auction-time p {
+    line-height: 1.1; }
+  section#auction-time .fa-clock-o {
+    color: #f05523; }
+  section#auction-time .countdown-clock {
+    font-size: 3rem;
+    color: #f05523 !important;
+    margin-top: -6px; }
+
+section#how-it-works {
+  background-color: #fff;
+  padding-top: 3rem;
+  padding-bottom: 3rem; }
+  section#how-it-works h1 {
+    color: #f05523;
+    margin-bottom: 2rem; }
+
+section#easy {
+  background-color: #fff;
+  padding-top: 3rem;
+  padding-bottom: 3rem; }
+  section#easy h1 {
+    color: #292e40;
+    margin-bottom: 2rem; }

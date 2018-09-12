@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "8QTT9SM697.com.bilinedev.123Quanto",
+                "paths": [ "/*", "/login"]
+            }
+        ]
+    }
+}

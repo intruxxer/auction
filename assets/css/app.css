@@ -1,0 +1,350 @@
+.bar {
+	color: #fff;
+	background-color: #4a6d82;
+	margin-top: 0;
+	margin-bottom: 0; }
+	
+#countdown-clock {
+	font-size: 3rem;
+	font-weight: 700;
+	color: #4a6d82;
+	margin-top: -1rem; }
+
+.countdown-clock-auction {
+	font-size: 1.5rem;
+	font-weight: 400;
+	color: #fff;
+	background-color: #4a6d82;
+	padding-top: 6px;
+	padding-bottom: 6px; }
+
+
+
+
+/** **/
+body.home section, body.login section, body.register section { margin-bottom: 4rem; }
+body.seller section { margin-bottom: 0; }
+
+body.seller-auction-detail h2 + p { margin-top: -2rem; }
+	
+	
+	
+/** REGISTER FORM **/
+#welcome, #register-form {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 8px; }
+
+#welcome .container, #register-form .container { padding: 1.875rem 0.9375rem; }
+
+#register-form .is-hidden { display: none!important; }
+
+#register-form input[type="text"], #register-form input[type="email"], #register-form input[type="password"] {
+	border: 0;
+	border-bottom: 1px solid #4a6d82;
+	box-shadow: none; }
+	
+#register-form .button { 
+	color: #4a6d82!important;
+	background-color: #fff;
+	width: 100%;
+	border: 1px solid #4a6d82; }
+	
+#register-form .button.is-active {
+	color: #fff!important;
+	background-color: #4a6d82!important; }
+	
+#register-form .button.submit {
+	color: #fff!important;
+	background-color: #4a6d82!important;
+	max-width: 180px; }
+
+
+
+	
+#welcome a {
+	color: #4a6d82;
+	text-align: center;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-bottom: 1rem;
+	display: block;
+	border: 1px solid #4a6d82;
+	border-radius: 4px; }
+#welcome a.social-media {
+	color: #fff;
+	background-color: #4a6d82; }
+#welcome a:last-child { margin-bottom: 0; }
+
+#welcome p {
+	color: #4a6d82;
+	text-align: center;
+	position: relative; }
+#welcome p:before {
+	content: "";
+	width: 100%;
+	height: 0;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	border-bottom: 1px solid #4a6d82; }
+	
+#welcome p span {
+	background-color: #fff;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	display: inline-block;
+	position: relative; }
+	
+
+
+
+/** **/
+.columns:after, .columns:before {
+    content: ' ';
+    display: table;
+}
+.columns:after { clear: both; }
+
+
+
+
+/** SELLER DASHBOARD **/
+#empty-garage {
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: inherit;
+	position: relative; }
+
+#empty-garage .badge {
+	background-color: rgba(74,109,130,0.75);
+	width: 250px;
+	height: 250px;
+	display: block!important;
+	border-radius: 50%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%); }
+#empty-garage .badge:before {
+	content: "";
+	width: 256px;
+	height: 256px;
+	position: absolute;
+	left: -3px;
+	top: -3px;
+	border: 1px solid #4a6d82;
+	border-radius: 50%; }
+	
+#empty-garage .badge p {
+	font-size: 1.667rem;
+	font-weight: 700;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%); }
+
+
+fieldset.faux-radio { position: relative; }
+
+input[type=checkbox], input[type=radio] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0; }
+		
+[type=checkbox] + label, [type="radio"]  + label {
+	color: #fff;
+	line-height: 36px;
+	background-color: #999;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin: 0;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	min-width:36px;
+	height: 36px;
+	display: inline-block;
+	border-radius: 18px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.25); }
+[type="checkbox"]:checked  + label, [type="radio"]:checked  + label { background-color: #fc510b!important; }
+	
+	
+	
+/** **/
+form { margin-bottom: 2rem; }
+form#search-form { margin-bottom: 0; }
+
+form h3 { margin-bottom: 1rem; }
+
+form [type="text"] { margin-bottom: 1rem; }
+	
+#search-form button { 
+	color: #999;
+	border: none;
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	right: 0;
+	top: 0; background-color:transparent; }
+#search-form button:before { display: none; }
+
+
+
+
+/** **/
+.carousel.dealer h3 {
+	color: #4a6d82;
+	line-height: 48px;
+	text-align: center;
+	background-color: #fff;
+	height: 48px;
+	margin-top: 0;
+	margin-bottom: 0; }
+	
+.carousel.dealer .slick-arrow {
+	background-color: #fff;
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0;
+	z-index: 100; }
+.carousel.dealer .slick-prev { left: 0; }
+.carousel.dealer .slick-next { right: 0; }
+.carousel.dealer .slick-disabled { display: none!important; }
+
+.carousel.dealer .slick-arrow i {
+	color: #4a6d82;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%); }
+	
+.carousel.dealer .bids { margin-bottom: 1rem; }
+	
+.carousel.dealer .bids .row { border-bottom: 1px solid #eee;}
+.carousel.dealer .bids .row:last-child { margin-top: 1rem; } 
+
+.carousel.dealer .quick-bids { margin-bottom: 1.5rem; }
+
+.carousel.dealer .quick-bids a { background-color: #fc510b; }
+
+
+ul.slick-dots {
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	position: absolute;
+	left: 50%;
+	bottom: 6px;
+	list-style-type: none; }
+	
+ul.slick-dots li {
+	margin: 0 5px;
+	float: left; }
+
+ul.slick-dots button {
+	text-indent: -9999px;
+	background-color: transparent;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 1px solid #fff; }
+	
+ul.slick-dots .slick-active button { background-color: #fff; }
+
+
+
+
+/** **/
+ul.spec {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 1rem;
+	list-style-type: none; }
+body.seller-auction-detail ul.spec { padding: 0; }
+aside ul.spec, body.seller-auction-detail aside ul.spec { padding: 0; }
+
+p + .spec { margin-top: -1rem; }
+	
+ul.spec:before, ul.spec:after {
+	content: "";
+	display: table; }
+ul.spec:after { clear: both; }
+	
+ul.spec li {
+	background-image: url(../img/icon-spec.png);
+	background-repeat: no-repeat;
+	font-size: 0.75rem;
+	line-height: 16px;
+	width: 50%;
+	padding-left: 24px;
+	margin-bottom: 8px;
+	float: left; }
+section ul.spec li {
+	width: auto;
+	margin-left: 32px;
+	margin-right: 32px; }
+section ul.spec li:first-child { margin-left: 0; }
+section ul.spec li:last-child { margin-right: 0; }
+
+aside ul.spec li, body.seller-auction-detail aside ul.spec li {
+	width: 50%;
+	margin-left: 0;
+	margin-right: 0; }
+
+ul.spec li.fuel { background-position: 0 0; }
+ul.spec li.odometer { background-position: 0 -16px; }
+ul.spec li.transmission { background-position: 0 -32px; }
+ul.spec li.capacity { background-position: 0 -48px; }
+
+
+
+
+/** ACCORDION **/
+.accordion { background-color: #fff; }
+
+.accordion-title {
+	font-size: 1rem;
+	color: #333;
+	text-align: center;
+	padding-top: 12px;
+	padding-bottom: 11px;
+	margin-bottom: 8px;
+	border: 1px solid #ccc;
+	border-radius: 10px; }
+.accordion-title:before { display: none; }
+.bid-history .accordion-title {
+	border: none!important;
+	border-top: 1px solid #ccc!important;
+	border-bottom: 1px solid #ccc!important;
+	border-radius: 0!important; }
+
+	
+.accordion-item:first-child>:first-child, .accordion-item:last-child>:last-child { border-radius: 10px; }
+:last-child:not(.is-active)>.accordion-title  {
+	border: 1px solid #ccc;
+	border-radius: 10px; }
+	
+.accordion-content {
+	padding-top: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+	border: none; }
+	
+.bid-history .accordion-content {
+	padding-top: 8px;
+	padding-bottom: 8px; }
+
+	
+.bid-history p { margin-bottom: 0; }
+
+
+
+
+
+
