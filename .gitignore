@@ -1,1 +1,10 @@
 .DS_Store
+
+*/logs/log-*.php
+!*/logs/index.html
+*/cache/*
+!*/cache/index.html
+!*/cache/.htaccess
+/index.php
+.idea/*
+.vscode/*
