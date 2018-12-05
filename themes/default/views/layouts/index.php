@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo site_url() ?>assets/css/app.css">
     <link rel="stylesheet" href="<?php echo site_url() ?>assets/css/app-new.css">
     <link rel="stylesheet" href="<?php echo site_url() ?>assets/css/app-self.css">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
 
     <!-- Firebase App is always required and must be first -->
