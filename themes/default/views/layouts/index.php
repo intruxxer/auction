@@ -19,7 +19,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
 
 
-    <!--<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
     <script>
         // Initialize Firebase
         var config = {
