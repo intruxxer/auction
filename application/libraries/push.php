@@ -12,7 +12,8 @@ class Push {
         );
 
         $headers = array(
-             'Authorization: key='.$this->config->item('fcm_api_key'),
+             //'Authorization: key='.$this->config->item('fcm_api_key'),
+             'Authorization: key='."AAAAglBA3WY:APA91bFz-XCcLL5PuDbgBc9b9vUuohsRb7FPkMRZWR2rPt0urKGKkYHrDgJEyIPdUxmNfVd8hwNXF-bGGS1vNli56ct955YS3ke1QqwBV-UW71zrp2a7LmI5atrQ-CEhXdIivoLouDvq",
              'Content-Type: application/json'
         );
 
