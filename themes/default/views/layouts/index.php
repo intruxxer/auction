@@ -12,6 +12,27 @@
     <link rel="stylesheet" href="<?php echo site_url() ?>assets/css/app-new.css">
     <link rel="stylesheet" href="<?php echo site_url() ?>assets/css/app-self.css">
     <link rel="manifest" href="manifest.json">
+
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
+
+
+    <!--<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>-->
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAdEQbcHsexfT5zMcPZxMOqQCQD4DNgMMw",
+            authDomain: "quanto-7e4fa.firebaseapp.com",
+            databaseURL: "https://quanto-7e4fa.firebaseio.com",
+            projectId: "quanto-7e4fa",
+            storageBucket: "quanto-7e4fa.appspot.com",
+            messagingSenderId: "559692176742"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <script type="text/javascript">
     window.$crisp=[];window.CRISP_WEBSITE_ID="e12a37ca-152f-4f3d-8c07-136a408f215e";(function(){d=document;s=d.createElement("script");
     s.src="https://client.crisp.im/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
@@ -102,9 +123,13 @@
     <footer id="main-footer"><div class="row"><hr></div></footer>
     <?php } ?>
     <?php if($this->session->userdata('login')){ ?>
-    <script type="text/javascript" src="https://quanto-1da38.firebaseapp.com/__/firebase/4.1.3/firebase-app.js"></script>
-    <script type="text/javascript" src="https://quanto-1da38.firebaseapp.com/__/firebase/4.1.3/firebase-messaging.js"></script>
-    <script type="text/javascript" src="https://quanto-1da38.firebaseapp.com/__/firebase/init.js"></script>
+
+
+
+
+    <!--<script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js"></script>-->
+    <!--<script type="text/javascript" src="https://quanto-1da38.firebaseapp.com/__/firebase/init.js"></script>-->
     <script type="text/javascript">
       var firebase_permission = false;
       var firebase_messaging  = firebase.messaging();
@@ -135,11 +160,11 @@
       function requestPermission(){
         firebase_messaging.requestPermission()
           .then(function() {
-            firebase_permission = true; console.log('Notification permission granted.'); 
+            firebase_permission = true; console.log('Notification permission granted.');
             requestToken();
           })
           .catch(function(err) {
-            firebase_permission = false; console.log('Unable to get permission to notify.', err); 
+            firebase_permission = false; console.log('Unable to get permission to notify.', err);
           });
       }
 
@@ -175,24 +200,24 @@
 
       function isTokenSentToServer() { return window.localStorage.getItem('sentToServer') == 1; }
       function setTokenSentToServer(sent) { window.localStorage.setItem('sentToServer', sent ? 1 : 0); }
-      function isSameTokenSentToServer(currentToken) { 
+      function isSameTokenSentToServer(currentToken) {
         var oldToken = window.localStorage.getItem('tokenToServer');
         if(oldToken==currentToken){
             window.localStorage.setItem('sentToServer', 1);
-            return true; 
+            return true;
         }
         else{
             window.localStorage.setItem('sentToServer', 0);
             return false;
         }
       }
-      function setTokenValueSentToServer(token, email) { 
+      function setTokenValueSentToServer(token, email) {
         window.localStorage.setItem('tokenToServer', token);
         window.localStorage.setItem('userEmail', email);
         window.localStorage.setItem('sentToServer', 1);
       }
 
-      function setUserBrowser(){ 
+      function setUserBrowser(){
         // Chrome 1+
         var isChrome = !!window.chrome && !!window.chrome.webstore;
         if(isChrome){ return "chrome"; }
@@ -203,7 +228,7 @@
             // // Firefox 1.0+
             // var isFirefox = typeof InstallTrigger !== 'undefined';
             // if(isFirefox){ firebase_browser = "firefox"; }
-            // // Safari 3.0+ "[object HTMLElementConstructor]" 
+            // // Safari 3.0+ "[object HTMLElementConstructor]"
             // var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
             // if(isSafari){ firebase_browser = "safari"; }
             // // Internet Explorer 6-11
@@ -212,7 +237,7 @@
             // // Edge 20+
             // var isEdge = !isIE && !!window.StyleMedia;
             // if(isEdge){ firebase_browser = "edge"; }
-            return "other"; 
+            return "other";
         }
       }
 
@@ -241,7 +266,7 @@
         var isChrome = !!window.chrome && !!window.chrome.webstore;
         if(isChrome){ return "chrome"; } else{ return "other"; }
       }
-      
+
     </script>
     <?php } ?>
 </body>
