@@ -121,10 +121,6 @@
     <script src="<?= $this->template->get_theme_path() ?>js/firebase/fcm.js"></script>
 
     <script type="text/javascript">
-        var firebase_permission = false;
-        var firebase_messaging = firebase.messaging();
-        var firebase_browser = setUserBrowser();
-        var firebase_token;
         var firebase_user_id = "<?= $user_id ?>";
         var firebase_user_name = "<?= $user_name ?>";
         var firebase_user_email = "<?= $user_email ?>";

@@ -9,66 +9,142 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// check if browser supports notifications
+if (
+    'Notification' in window &&
+    'serviceWorker' in navigator &&
+    'localStorage' in window &&
+    'fetch' in window &&
+    'postMessage' in window
+) {
 
-var firebase_permission = false;
-var firebase_messaging = firebase.messaging();
-var firebase_browser = setUserBrowser();
-var firebase_token;
-var firebase_user_id = "<?= $user_id ?>";
-var firebase_user_name = "<?= $user_name ?>";
-var firebase_user_email = "<?= $user_email ?>";
-var firebase_user_role = "<?= $user_role ?>";
+    var firebase_permission = false;
+    var firebase_messaging = firebase.messaging();
+    var firebase_browser = setUserBrowser();
+    var firebase_token;
 
-//if(firebase_browser=="chrome"){ requestPermission(); }
+    // sign up for notifications if haven't signed yet
+    if (Notification.permission === 'granted') {
+        getToken();
+    }
 
-requestPermission();
+    // ask the user permission to notify
+    $('#subscribe').on('click', function () {
+        //subscribe();
+    });
 
-firebase_messaging.onTokenRefresh(function () {
-    firebase_messaging.getToken()
-        .then(function (refreshedToken) {
-            console.log('Token refreshed: ' + refreshedToken);
-            firebase_token = refreshedToken;
-            sendTokenToServer(firebase_token);
-        })
-        .catch(function (err) {
-            console.log('Unable to retrieve refreshed token ', err);
-        });
-});
+    // handle catch the notification on current page
+    messaging.onMessage(function (payload) {
 
-firebase_messaging.onMessage(function (payload) {
-    console.log("Message received. ", payload);
-});
+    });
 
-function requestPermission() {
-    firebase_messaging.requestPermission()
+    // Callback fired if Instance ID token is updated.
+    messaging.onTokenRefresh(function () {
+        messaging.getToken()
+            .then(function (refreshedToken) {
+                console.log('Token refreshed' + refreshedToken);
+                // Send Instance ID token to app server.
+                firebase_token = refreshedToken;
+                sendTokenToServer(refreshedToken);
+                //updateUIForPushEnabled(refreshedToken);
+            })
+            .catch(function (error) {
+                //showError('Unable to retrieve refreshed token', error);
+                console.log('Unable to retrieve refreshed token ', error);
+            });
+    });
+
+} else {
+
+
+    if (!('Notification' in window)) {
+       // showError('Notification not supported');
+    } else if (!('serviceWorker' in navigator)) {
+        //showError('ServiceWorker not supported');
+    } else if (!('localStorage' in window)) {
+       // showError('LocalStorage not supported');
+    } else if (!('fetch' in window)) {
+       // showError('fetch not supported');
+    } else if (!('postMessage' in window)) {
+       // showError('postMessage not supported');
+    }
+
+    console.warn('This browser does not support desktop notification.');
+    console.log('Is HTTPS', window.location.protocol === 'https:');
+    console.log('Support Notification', 'Notification' in window);
+    console.log('Support ServiceWorker', 'serviceWorker' in navigator);
+    console.log('Support LocalStorage', 'localStorage' in window);
+    console.log('Support fetch', 'fetch' in window);
+    console.log('Support postMessage', 'postMessage' in window);
+
+}
+
+
+function getToken() {
+    console.log('Since permission is granted, retrieving token...');
+    messaging.requestPermission()
         .then(function () {
             firebase_permission = true;
             console.log('Notification permission granted.');
-            requestToken();
+            // Get Instance ID token. Initially this makes a network call, once retrieved
+            // subsequent calls to getToken will return from cache.
+            messaging.getToken()
+                .then(function (currentToken) {
+
+                    if (currentToken) {
+                        firebase_token = currentToken;
+                        console.log(firebase_token);
+                        sendTokenToServer(firebase_token);
+                    } else {
+                        //showError('No Instance ID token available. Request permission to generate one');
+                        console.log('No Instance ID token available. Request permission to generate one.');
+                        setTokenSentToServer(false);
+                    }
+                })
+                .catch(function (error) {
+                    //showError('An error occurred while retrieving token', error);
+                    console.log('An error occurred while retrieving token. ', error);
+                    //updateUIForPushPermissionRequired();
+                    setTokenSentToServer(false);
+                });
         })
-        .catch(function (err) {
-            firebase_permission = false;
-            console.log('Unable to get permission to notify.', err);
+        .catch(function (error) {
+            //showError('Unable to get permission to notify', error);
+            console.log('Unable to get permission to notify', error);
         });
 }
 
-function requestToken() {
-    console.log('Since permission is granted, retrieving token...');
-    firebase_messaging.getToken()
-        .then(function (currentToken) {
-            if (currentToken) {
-                firebase_token = currentToken;
-                console.log(firebase_token);
-                sendTokenToServer(firebase_token);
-            } else {
-                console.log('No Instance ID token available. Request permission to generate one.');
+// Send the Instance ID token your application server, so that it can:
+// - send messages back to this app
+// - subscribe/unsubscribe the token from topics
+function sendTokenToServer(currentToken) {
+    if (!isTokenSentToServer(currentToken)) {
+        console.log('Sending token to server...');
+
+
+        var http = new XMLHttpRequest();
+        var url = "https://api.123quanto.com/engines/gcm/main.php";
+        var params = "user_id=" + firebase_user_id + "&device_id=" + firebase_browser + "&device_type=web&name=" + firebase_user_name + "&email=" + firebase_user_email + "&type=" + firebase_user_role + "&regId=" + currentToken;
+        http.open("POST", url, true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
+                console.log(http.responseText);
             }
-        }).catch(function (err) {
-        console.log('An error occurred while retrieving token. ', err);
-    });
+        }
+        http.send(params);
+
+        // send current token to server
+        //$.post(url, {token: currentToken});
+        //setTokenSentToServer(currentToken);
+        setTokenValueSentToServer(currentToken, firebase_user_email);
+    } else {
+        console.log('Token already sent to server so won\'t send it again unless it changes');
+    }
 }
 
-function sendTokenToServer(currentToken) {
+
+/*function sendTokenToServer(currentToken) {
     if (!isSameTokenSentToServer(currentToken)) {
         console.log('Sending token to server...');
         var http = new XMLHttpRequest();
@@ -86,7 +162,7 @@ function sendTokenToServer(currentToken) {
     } else {
         console.log('Same token was already sent to server, unless it changes, no need to resend.');
     }
-}
+}*/
 
 function isTokenSentToServer() {
     return window.localStorage.getItem('sentToServer') == 1;
