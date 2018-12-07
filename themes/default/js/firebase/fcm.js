@@ -9,6 +9,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+const messaging = firebase.messaging();
+
 // check if browser supports notifications
 if (
     'Notification' in window &&
@@ -18,7 +20,6 @@ if (
     'postMessage' in window
 ) {
 
-    const messaging = firebase.messaging();
     var firebase_permission = false;
     //var firebase_messaging = firebase.messaging();
     var firebase_browser = setUserBrowser();
