@@ -15,11 +15,9 @@
 
 
     <!-- Firebase App is always required and must be first -->
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-messaging.js"></script>
 
-
-    <!--<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>-->
     <script>
         // Initialize Firebase
         var config = {
@@ -267,6 +265,32 @@
                 return "other";
             }
         }
+
+
+        firebase_messaging.onMessage(function(payload) {
+
+            console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
+
+            var notificationTitle = '123Quanto';
+            var notificationOptions = {
+                body: 'You got a new message.',
+                icon: 'quanto-logo.png'
+            };
+
+            if (!("Notification" in window)) {
+                console.log("This browser does not support system notifications");
+            }
+            // Let's check whether notification permissions have already been granted
+            else if (Notification.permission === "granted") {
+                // If it's okay let's create a notification
+                var notification = new Notification(notificationTitle,notificationOptions);
+                notification.onclick = function(event) {
+                    event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                    window.open(payload.notification.click_action , '_blank');
+                    notification.close();
+                }
+            }
+        });
 
     </script>
 <?php }else{ ?>
