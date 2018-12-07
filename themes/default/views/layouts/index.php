@@ -243,10 +243,10 @@
                 // if(isEdge){ firebase_browser = "edge"; }
                 return "other";
             }
-        }
+        }*/
 
 
-        firebase_messaging.onMessage(function(payload) {
+        messaging.onMessage(function(payload) {
 
             console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
 
@@ -269,7 +269,7 @@
                     notification.close();
                 }
             }
-        });*/
+        });
 
     </script>
 <?php }else{ ?>
