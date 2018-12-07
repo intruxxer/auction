@@ -18,8 +18,9 @@ if (
     'postMessage' in window
 ) {
 
+    const messaging = firebase.messaging();
     var firebase_permission = false;
-    var firebase_messaging = firebase.messaging();
+    //var firebase_messaging = firebase.messaging();
     var firebase_browser = setUserBrowser();
     var firebase_token;
 
@@ -215,7 +216,7 @@ function setUserBrowser() {
 }
 
 
-firebase_messaging.onMessage(function (payload) {
+messaging.onMessage(function (payload) {
 
     console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
 
