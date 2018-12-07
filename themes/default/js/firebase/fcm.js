@@ -125,7 +125,7 @@ function sendTokenToServer(currentToken) {
 
 
         var http = new XMLHttpRequest();
-        var url = "https://api.123quanto.com/engines/gcm/main.php";
+        var url = "https://qa.api.123quanto.com/engines/gcm/main.php";
         var params = "user_id=" + firebase_user_id + "&device_id=" + firebase_browser + "&device_type=web&name=" + firebase_user_name + "&email=" + firebase_user_email + "&type=" + firebase_user_role + "&regId=" + currentToken;
         http.open("POST", url, true);
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
