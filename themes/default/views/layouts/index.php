@@ -118,7 +118,20 @@
     <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
 
-    <script src="<?= $this->template->get_theme_path() ?>js/firebase/fcm.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAdEQbcHsexfT5zMcPZxMOqQCQD4DNgMMw",
+            authDomain: "quanto-7e4fa.firebaseapp.com",
+            databaseURL: "https://quanto-7e4fa.firebaseio.com",
+            projectId: "quanto-7e4fa",
+            storageBucket: "quanto-7e4fa.appspot.com",
+            messagingSenderId: "559692176742"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <!--<script src="<?/*= $this->template->get_theme_path() */?>js/firebase/fcm.js"></script>-->
 
     <script type="text/javascript">
         var firebase_user_id = "<?= $user_id ?>";
@@ -126,13 +139,13 @@
         var firebase_user_email = "<?= $user_email ?>";
         var firebase_user_role = "<?= $user_role ?>";
         var firebase_permission = false;
-        //var firebase_messaging = firebase.messaging();
+        var firebase_messaging = firebase.messaging();
         var firebase_browser = setUserBrowser();
         var firebase_token;
 
         //if(firebase_browser=="chrome"){ requestPermission(); }
 
-        /*requestPermission();
+        requestPermission();
 
         firebase_messaging.onTokenRefresh(function () {
             firebase_messaging.getToken()
@@ -183,7 +196,7 @@
             if (!isSameTokenSentToServer(currentToken)) {
                 console.log('Sending token to server...');
                 var http = new XMLHttpRequest();
-
+                var url = "<?= $this->config->item( 'api_url' ) ?>" + "engines/gcm/main.php";
                 var params = "user_id=" + firebase_user_id + "&device_id=" + firebase_browser + "&device_type=web&name=" + firebase_user_name + "&email=" + firebase_user_email + "&type=" + firebase_user_role + "&regId=" + currentToken;
                 http.open("POST", url, true);
                 http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -247,10 +260,9 @@
                 // if(isEdge){ firebase_browser = "edge"; }
                 return "other";
             }
-        }*/
+        }
 
-
-        messaging.onMessage(function(payload) {
+        firebase_messaging.onMessage(function(payload) {
 
             console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
 
