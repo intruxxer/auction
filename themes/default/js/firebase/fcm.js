@@ -20,10 +20,7 @@ if (
     'postMessage' in window
 ) {
 
-    var firebase_permission = false;
-    //var firebase_messaging = firebase.messaging();
-    var firebase_browser = setUserBrowser();
-    var firebase_token;
+
 
     // sign up for notifications if haven't signed yet
     if (Notification.permission === 'granted') {
@@ -37,6 +34,38 @@ if (
 
     // handle catch the notification on current page
     messaging.onMessage(function (payload) {
+
+        console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
+
+        var notificationTitle = '123Quanto';
+        var notificationOptions = {
+            body: 'You got a new message.',
+            icon: 'quanto-logo.png'
+        };
+
+        // Let's check whether notification permissions have already been granted
+        Notification.requestPermission(function(permission) {
+            if (permission === 'granted') {
+                // If it's okay let's create a notification
+                var notification = new Notification(notificationTitle,notificationOptions);
+                notification.onclick = function(event) {
+                    event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                    window.open(payload.notification.click_action , '_blank');
+                    notification.close();
+                }
+            }
+        });
+
+        /*// Let's check whether notification permissions have already been granted
+        if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+            var notification = new Notification(notificationTitle,notificationOptions);
+            notification.onclick = function(event) {
+                event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                window.open(payload.notification.click_action , '_blank');
+                notification.close();
+            }
+        }*/
 
     });
 

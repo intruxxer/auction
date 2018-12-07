@@ -125,6 +125,10 @@
         var firebase_user_name = "<?= $user_name ?>";
         var firebase_user_email = "<?= $user_email ?>";
         var firebase_user_role = "<?= $user_role ?>";
+        var firebase_permission = false;
+        //var firebase_messaging = firebase.messaging();
+        var firebase_browser = setUserBrowser();
+        var firebase_token;
 
         //if(firebase_browser=="chrome"){ requestPermission(); }
 
