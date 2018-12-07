@@ -18,8 +18,8 @@ $config['timezone'] = 'America/Vancouver';
 | path to your installation.
 |
 */
-$config['base_url']	 = 'https://qa.auction.123quanto.com/';
-$config['api_url']       = 'https://qa.api.123quanto.com/';
+$config['base_url']	 = '';
+$config['api_url']   = 'https://api.123quanto.com/';
 
 /*
 |--------------------------------------------------------------------------
