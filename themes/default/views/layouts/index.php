@@ -12,25 +12,6 @@
     <link rel="stylesheet" href="<?php echo site_url() ?>assets/css/app-new.css">
     <link rel="stylesheet" href="<?php echo site_url() ?>assets/css/app-self.css">
     <link rel="manifest" href="/manifest.json">
-
-
-    <!-- Firebase App is always required and must be first -->
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
-
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAdEQbcHsexfT5zMcPZxMOqQCQD4DNgMMw",
-            authDomain: "quanto-7e4fa.firebaseapp.com",
-            databaseURL: "https://quanto-7e4fa.firebaseio.com",
-            projectId: "quanto-7e4fa",
-            storageBucket: "quanto-7e4fa.appspot.com",
-            messagingSenderId: "559692176742"
-        };
-        firebase.initializeApp(config);
-    </script>
-
     <script type="text/javascript">
         window.$crisp = [];
         window.CRISP_WEBSITE_ID = "e12a37ca-152f-4f3d-8c07-136a408f215e";
@@ -133,10 +114,12 @@
 <?php } ?>
 <?php if ( $this->session->userdata( 'login' ) ) { ?>
 
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
 
-    <!--<script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js"></script>-->
-    <!--<script type="text/javascript" src="https://quanto-1da38.firebaseapp.com/__/firebase/init.js"></script>-->
+    <script src="<?= $this->template->get_theme_path() ?>js/firebase/fcm.js"></script>
+
     <script type="text/javascript">
         var firebase_permission = false;
         var firebase_messaging = firebase.messaging();
@@ -149,7 +132,7 @@
 
         //if(firebase_browser=="chrome"){ requestPermission(); }
 
-        requestPermission();
+        /*requestPermission();
 
         firebase_messaging.onTokenRefresh(function () {
             firebase_messaging.getToken()
@@ -200,7 +183,7 @@
             if (!isSameTokenSentToServer(currentToken)) {
                 console.log('Sending token to server...');
                 var http = new XMLHttpRequest();
-                var url = "<?= $this->config->item( 'api_url' ) ?>" + "engines/gcm/main.php";
+
                 var params = "user_id=" + firebase_user_id + "&device_id=" + firebase_browser + "&device_type=web&name=" + firebase_user_name + "&email=" + firebase_user_email + "&type=" + firebase_user_role + "&regId=" + currentToken;
                 http.open("POST", url, true);
                 http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -257,7 +240,7 @@
                 // var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
                 // if(isSafari){ firebase_browser = "safari"; }
                 // // Internet Explorer 6-11
-                // var isIE = /*@cc_on!@*/false || !!document.documentMode;
+                // var isIE = /!*@cc_on!@*!/false || !!document.documentMode;
                 // if(isIE){ firebase_browser = "ie"; }
                 // // Edge 20+
                 // var isEdge = !isIE && !!window.StyleMedia;
@@ -290,7 +273,7 @@
                     notification.close();
                 }
             }
-        });
+        });*/
 
     </script>
 <?php }else{ ?>
