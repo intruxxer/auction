@@ -268,13 +268,33 @@ class Home extends Front_Controller {
         $query                = '/request?';
         $key                  = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';
         $reset_password_url   = $url . $resource . $query . $key;
-	    try{
 
-	    	$client = new GuzzleHttp\Client([ 'base_uri' => $url ]);
 
-	    } catch(Exception $e){
-	    	echo $e;
-	    }
+	    if($this->input->post('email')){
+
+            try{
+
+                $client          = new GuzzleHttp\Client([ 'base_uri' => $url ]);
+                $response        = $client->request('POST', $reset_password_url,
+                    [
+                        'form_params' =>
+                            [
+                                'email'       => $this->input->post('email'),
+                            ]
+                    ]
+                );
+
+                $content          = $response->getBody()->getContents();
+
+                 echo $content;
+                return false;
+
+
+            } catch(Exception $e){
+                echo $e;
+            }
+
+        }
 
         $this->template->set('body_class', 'login');
         $this->template->set('reset_password_url', $reset_password_url);

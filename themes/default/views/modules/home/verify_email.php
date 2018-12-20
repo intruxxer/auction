@@ -44,7 +44,8 @@
 
 		$.ajax({
 		        type        : 'POST',
-		        url         : '<?= $reset_password_url ?>',
+		        //url         : '<?= $reset_password_url ?>',
+		        url         : '<?= $this->config->item('base_url') . 'reset_password' ?>',
 		        data        : formData,
 		        dataType    : 'json',
 		        encode      : true
