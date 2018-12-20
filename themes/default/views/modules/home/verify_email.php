@@ -1,7 +1,7 @@
 <section>
 	<div class="row">
 		<div class="columns small-12 small-uncentered medium-6  medium-centered large-4 text-center">
-			<img src="<?php echo site_url(); ?>/assets/img/logo-q.png">	
+			<img src="<?php echo site_url(); ?>/assets/img/logo-q.png">
 			<h1>Reset Password</h1>
 		</div>
 	</div>
@@ -39,34 +39,41 @@
 
 		var formData = {
 			"email"  : email
-		}; 
+		};
 		console.log(formData);
 
 		$.ajax({
-		        type        : 'POST', 
-		        url         : '<?= $reset_password_url ?>', 
+		        type        : 'POST',
+		        url         : '<?= $reset_password_url ?>',
 		        data        : formData,
 		        dataType    : 'json',
 		        encode      : true
-		    }).done(function(resp) { 
+		    }).done(function(resp) {
+
 		    	$('#edit-info-title').html("Reset Password");
-				$('#edit-info-text').html("Please check your email to confirm reset password.");
+				//$('#edit-info-text').html("Please check your email to confirm reset password.");
+                if(resp.status === "success"){
+                    $('#edit-info-text').html(resp.data);
+                }else{
+                    $('#edit-info-text').html(resp.error_message);
+                }
+
 			    $('#modal_edit_info').foundation('open');
-		    	
+
 		    }).fail(function(resp) {
-			    $('#edit-info-title').html("Car Color");
+			    $('#edit-info-title').html("Password Recovery");
 				$('#edit-info-text').html("Error on sending reset request to your email.");
 			    $('#modal_edit_info').foundation('open');
 			}).always(function(resp) {
-		    	console.log(resp); 
+		    	console.log(resp);
 		});
-		
+
 		e.preventDefault();
 	});
 
 	$('#car-color-form').on('keyup keypress', function(e) {
 	  var keyCode = e.keyCode || e.which;
-	  if (keyCode === 13) { 
+	  if (keyCode === 13) {
 	    e.preventDefault();
 	    return false;
 	  }

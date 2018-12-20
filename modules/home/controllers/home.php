@@ -2,7 +2,7 @@
 
 
 class Home extends Front_Controller {
-	
+
 	  public function __construct() {
         parent::__construct();
         $this->load->library('guzzle');
@@ -62,15 +62,15 @@ class Home extends Front_Controller {
         }
     }
 
-    public function terms(){ 
+    public function terms(){
         $this->template->set('type', 'registration');
-        $this->template->build('terms'); 
+        $this->template->build('terms');
     }
 
     public function activated_account(){
         $this->template->set('body_class', 'notification');
         $this->template->set('type', 'registration');
-        $this->template->build('activated_account'); 
+        $this->template->build('activated_account');
     }
 
     public function login()
@@ -79,28 +79,28 @@ class Home extends Front_Controller {
       		  $email           = $this->input->post('email');
   	        $password        = $this->input->post('password');
 
-  	        $url             = $this->config->item('api_url');      
+  	        $url             = $this->config->item('api_url');
   	        $resource        = 'users';
   	        $query           = '/login?';
-  	        $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';      
+  	        $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';
   	        $api_url         = $url . $resource . $query . $key;
 
   	        try{
   	          $client          = new GuzzleHttp\Client([ 'base_uri' => $url ]);
-  	          $response        = $client->request('POST', $api_url, 
+  	          $response        = $client->request('POST', $api_url,
   	                                [
-  	                                  'form_params' => 
+  	                                  'form_params' =>
   	                                    [
   	                                        'email'     => $email,
   	                                        'password'  => $password
   	                                    ]
   	                                ]
   	                            );
-  	            
+
               $content          = $response->getBody()->getContents();
   	          $result           = json_decode($content);
               $result           = $result->data;
-  
+
               if($result->type == "Seller"){
                 $this->session->set_userdata('login', true);
                 $this->session->set_userdata('seller_profile', $result);
@@ -115,7 +115,7 @@ class Home extends Front_Controller {
 
   	        }
   	        catch(Exception $e){
-  	          //echo $e; 
+  	          //echo $e;
               redirect('login', 'refresh');
   	        }
       	}
@@ -126,7 +126,7 @@ class Home extends Front_Controller {
           $this->template->set('body_class', 'login');
           $this->template->set('type', 'registration');
       		$this->template->build('login');
-      	}  
+      	}
     }
 
     public function google_connect(){
@@ -168,7 +168,7 @@ class Home extends Front_Controller {
             $user  = json_decode($user);
             $user  = $user->data;
             //(2.1) If Found, Login to Member Dashboard.
-            if(!empty($user)){ 
+            if(!empty($user)){
               if($user->type == "Seller"){
                   $this->session->set_userdata('login', true);
                   $this->session->set_userdata('seller_profile', $user);
@@ -180,17 +180,17 @@ class Home extends Front_Controller {
               }
             }
             //(2.2) If Not Found, Load Registration Form with Google User Data
-            else{ 
+            else{
               $this->session->set_userdata('social_register_gid', $google_user['google_id']);
               $this->session->set_userdata('social_register_email', $google_user['email']);
               $this->session->set_userdata('social_register_name', $google_user['fullname']);
-              redirect('register', 'refresh'); 
+              redirect('register', 'refresh');
             }
         }
         else
         {
-            if($google_error=='access_denied'){ 
-              redirect(site_url().'?error=google_auth', 'refresh'); 
+            if($google_error=='access_denied'){
+              redirect(site_url().'?error=google_auth', 'refresh');
             }
         }
     }
@@ -237,7 +237,7 @@ class Home extends Front_Controller {
                 $user  = json_decode($user);
                 $user  = $user->data;
                 //(2.1) If Found, Login to Member Dashboard.
-                if(!empty($user)){ 
+                if(!empty($user)){
                   if($user->type == "Seller"){
                       $this->session->set_userdata('login', true);
                       $this->session->set_userdata('seller_profile', $user);
@@ -249,27 +249,34 @@ class Home extends Front_Controller {
                   }
                 }
                 //(2.2) If Not Found, Load Registration Form with FB User Data
-                else{ 
+                else{
                   $this->session->set_userdata('social_register_fbid', $facebook_user['facebook_id']);
                   $this->session->set_userdata('social_register_email', $facebook_user['email']);
                   $this->session->set_userdata('social_register_name', $facebook_user['fullname']);
-                  redirect('register', 'refresh'); 
+                  redirect('register', 'refresh');
                 }
             }
         }
         else{
-            redirect(site_url().'?error=fb_auth', 'refresh'); 
-        } 
+            redirect(site_url().'?error=fb_auth', 'refresh');
+        }
     }
 
     public function reset_password(){
         $url                  = $this->config->item('api_url');
         $resource             = 'users/reset_password';
-        try{ $client          = new GuzzleHttp\Client([ 'base_uri' => $url ]); } catch(Exception $e){ echo $e; }
-        
         $query                = '/request?';
-        $key                  = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';      
+        $key                  = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';
         $reset_password_url   = $url . $resource . $query . $key;
+	    try{
+
+	    	$client = new GuzzleHttp\Client([ 'base_uri' => $url ]);
+
+	    	//print_r($client);
+
+	    } catch(Exception $e){
+	    	echo $e;
+	    }
 
         $this->template->set('body_class', 'login');
         $this->template->set('reset_password_url', $reset_password_url);
@@ -282,11 +289,11 @@ class Home extends Front_Controller {
           $email        = $this->input->post('email');
           $password     = $this->input->post('password');
           $re_password  = $this->input->post('re_password');
-          
-          $email_info = $this->check_email($email); 
+
+          $email_info = $this->check_email($email);
           if($email_info->status == "error"){
-            $error_message = $email_info->error_message; 
-            
+            $error_message = $email_info->error_message;
+
             $this->template->set('error_message', $error_message);
             $this->template->set('title', 'Register');
             $this->template->set('body_class', 'register');
@@ -296,7 +303,7 @@ class Home extends Front_Controller {
 
           //validation
             if($email && $re_password == $password){
-              
+
               $this->session->set_userdata('email', $email);
               $this->session->set_userdata('password', $password);
               $this->template->set('body_class', 'register');
@@ -309,7 +316,7 @@ class Home extends Front_Controller {
               $this->template->set('type', 'registration');
               $this->template->build('register');
             }
-          }  
+          }
   	    }
   	    elseif($type=='dealer'){
             $registration_role = $this->input->post('registration-role');
@@ -326,17 +333,17 @@ class Home extends Front_Controller {
               $facebook_id     = $this->session->userdata('social_register_fbid');
               $google_id       = $this->session->userdata('social_register_gid');
               //Guzzle API seller registration
-              $url             = $this->config->item('api_url');      
+              $url             = $this->config->item('api_url');
               $resource        = 'sellers';
               $query           = '/register?';
-              $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';      
+              $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';
               $api_url         = $url . $resource . $query . $key;
 
               try{
                 $client          = new GuzzleHttp\Client([ 'base_uri' => $url ]);
-                $response        = $client->request('POST', $api_url, 
+                $response        = $client->request('POST', $api_url,
                                       [
-                                        'form_params' => 
+                                        'form_params' =>
                                           [
                                               'email'       => $this->session->userdata('email'),
                                               'password'    => $this->session->userdata('password'),
@@ -353,7 +360,7 @@ class Home extends Front_Controller {
                                           ]
                                       ]
                                   );
-                  
+
                 $content          = $response->getBody()->getContents();
                 $result           = json_decode($content);
                 $result           = $result->data;
@@ -364,11 +371,11 @@ class Home extends Front_Controller {
                   redirect('seller', 'refresh');
                 }else{
                   redirect('home', 'refresh');
-                } 
-                
+                }
+
               }
               catch(Exception $e){
-                //echo $e; 
+                //echo $e;
                 redirect('home', 'refresh');
               }
             }else{
@@ -382,7 +389,7 @@ class Home extends Front_Controller {
               $company_phone    = $this->input->post('company_phone');
               $company_website  = $this->input->post('company_website');
               $company_address  = $this->input->post('company_address');
-              
+
               $dealer_data     = array(
                 'company_name'  => $company_name,
                 'address_1'     => $address_1,
@@ -402,7 +409,7 @@ class Home extends Front_Controller {
               $this->template->set('type', 'registration');
               $this->template->build('register_dealer');
             }
-            
+
         }elseif($type=='dealer_create'){
           $key_contact          = $this->input->post('key_contact');
           $key_contact_title    = $this->input->post('key_contact_title');
@@ -417,17 +424,17 @@ class Home extends Front_Controller {
 
           $dealer_data = $this->session->userdata('dealer_data');
           //Guzzle Dealer Register
-          $url             = $this->config->item('api_url');      
+          $url             = $this->config->item('api_url');
           $resource        = 'dealers';
           $query           = '/register?';
-          $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';      
+          $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';
           $api_url         = $url . $resource . $query . $key;
 
           try{
             $client          = new GuzzleHttp\Client([ 'base_uri' => $url ]);
-            $response        = $client->request('POST', $api_url, 
+            $response        = $client->request('POST', $api_url,
                                   [
-                                    'form_params' => 
+                                    'form_params' =>
                                       [
                                           'email'             => $this->session->userdata('email'),
                                           'password'          => $this->session->userdata('password'),
@@ -454,7 +461,7 @@ class Home extends Front_Controller {
                                       ]
                                   ]
                               );
-              
+
             $content          = $response->getBody()->getContents();
             $result           = json_decode($content);
             $result           = $result->data;
@@ -467,10 +474,10 @@ class Home extends Front_Controller {
               redirect('dealer', 'refresh');
             }else{
               redirect('home', 'refresh');
-            }   
+            }
           }
           catch(Exception $e){
-            //echo $e; 
+            //echo $e;
             redirect('register/dealer', 'refresh');
           }
         }
@@ -498,17 +505,17 @@ class Home extends Front_Controller {
         $zip_code        = $this->input->post('zip_code');
         $avatar          = $this->input->post('avatar');
 
-        $url             = $this->config->item('api_url');       
+        $url             = $this->config->item('api_url');
         $resource        = $this->input->post('role');
         $query           = '/register?';
-        $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';      
+        $key             = 'key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';
         $api_url         = $url . $resource . $query . $key;
 
         try{
           $client          = new GuzzleHttp\Client([ 'base_uri' => $url ]);
-          $response        = $client->request('POST', $api_url, 
+          $response        = $client->request('POST', $api_url,
                                 [
-                                  'form_params' => 
+                                  'form_params' =>
                                     [
                                         'first_name'  => $first_name,
                                         'last_name'   => $last_name,
@@ -531,7 +538,7 @@ class Home extends Front_Controller {
           $result          = json_decode($result);
         }
         catch(Exception $e){
-          //echo $e; 
+          //echo $e;
         }
 
     }
@@ -557,27 +564,27 @@ class Home extends Front_Controller {
     $resource       = 'users';
     $query          = '/check_email';
     $key            = '?key=312fd05d107f1b0a42ea36a7b4dfa282019d42be';
-    $api_url        = $url . $resource . $query . $key; 
+    $api_url        = $url . $resource . $query . $key;
 
     try{
         $client          = new GuzzleHttp\Client([ 'base_uri' => $url ]);
-        $response        = $client->request('POST', $api_url, 
+        $response        = $client->request('POST', $api_url,
                               [
-                                'form_params' => 
+                                'form_params' =>
                                   [
                                       'email'     => $email
                                   ]
                               ]
                           );
         $content          = $response->getBody()->getContents();
-        $result           = json_decode($content); 
+        $result           = json_decode($content);
         return $result;
     }
     catch(Exception $e){
         return false;
     }
   }
-    
+
 }
 
 ?>

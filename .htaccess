@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /auction/public
+#RewriteBase /auction/public
 RewriteCond $1 !^(index\.php|assets|data|docs|engines|maintenance|themes|uploads|single-page|sql)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
