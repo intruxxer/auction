@@ -272,8 +272,6 @@ class Home extends Front_Controller {
 
 	    	$client = new GuzzleHttp\Client([ 'base_uri' => $url ]);
 
-	    	//print_r($client);
-
 	    } catch(Exception $e){
 	    	echo $e;
 	    }
