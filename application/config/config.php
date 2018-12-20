@@ -19,7 +19,7 @@ $config['timezone'] = 'America/Vancouver';
 |
 */
 $config['base_url']	 = '';
-$config['api_url']   = 'https://qa.api.123quanto.com/';
+$config['api_url']   = 'https://api.123quanto.com/';
 
 /*
 |--------------------------------------------------------------------------
